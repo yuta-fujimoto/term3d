@@ -25,6 +25,11 @@ typedef struct s_point {
     double z;
 } t_point;
 
+typedef struct s_points_set {
+	t_point			*p;
+	unsigned int	size;
+} t_points_set;
+
 void rotate_y(t_point buffer[BUFFER_SIZE], int size, bool isleft);
 void rotate_x(t_point buffer[BUFFER_SIZE], int size, bool isleft);
 bool kbhit(void);
