@@ -11,7 +11,8 @@ int clamp(int v)
 }
 
 // 透視投影
-void project_points(double screen[TERM_SIZE][TERM_SIZE], const t_point buffer[BUFFER_SIZE], int size)
+void project_points(
+	double screen[TERM_SIZE][TERM_SIZE], const t_point buffer[BUFFER_SIZE], int size)
 {
 	int		i;
 	int		x;
@@ -19,10 +20,13 @@ void project_points(double screen[TERM_SIZE][TERM_SIZE], const t_point buffer[BU
 	double	z;
 
 	i = -1;
-	while (++i < size) {
+	while (++i < size)
+	{
 		z = (buffer[i].z - VEIW_POINT) / EXP_RATE;
-		x = clamp(round(buffer[i].x / z + (TERM_SIZE + 2.0) / 2.0));
-		y = clamp(round(buffer[i].y / z + (TERM_SIZE + 2.0) / 2.0));
+		// x = clamp(round(buffer[i].x / z + (TERM_SIZE + 2.0) / 2.0));
+		// y = clamp(round(buffer[i].y / z + (TERM_SIZE + 2.0) / 2.0));
+		x = clamp(round(buffer[i].x / z + TERM_SIZE / 2.0));
+		y = clamp(round(TERM_SIZE / 2.0 - buffer[i].y / z));
 		if (screen[x][y] > z * EXP_RATE || screen[x][y] == 0.0)
 			screen[x][y] = z * EXP_RATE;
 	}

@@ -24,9 +24,9 @@ void exec_key_action(char key, t_point buffer[BUFFER_SIZE],
 // https://www.lisz-works.com/entry/c-lang-key-interrupt のコピペ
 bool kbhit(void)
 {
-	struct termios  oldt, newt;
-	int             ch;
-	int             oldf;
+	struct termios	oldt, newt;
+	int				ch;
+	int				oldf;
 
 	tcgetattr(STDIN_FILENO, &oldt);
 	newt = oldt;
@@ -40,7 +40,8 @@ bool kbhit(void)
 	tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
 	fcntl(STDIN_FILENO, F_SETFL, oldf);
 
-	if (ch != EOF) {
+	if (ch != EOF)
+	{
 		ungetc(ch, stdin);
 		return (true);
 	}

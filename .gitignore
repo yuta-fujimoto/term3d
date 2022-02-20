@@ -1,2 +1,18 @@
-*.o
-term3d
+*
+!.editorconfig
+!.github
+!.github/
+!.github/**
+!.gitignore
+!.gitkeep
+!Makefile
+!README.md
+!**/
+!*.c
+!*.h
+
+
+# tests
+destructor.c
+!auto_test.sh
+gtest
