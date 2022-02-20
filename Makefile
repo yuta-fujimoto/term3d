@@ -11,9 +11,11 @@ uniq = $(if $1,$(firstword $1) $(call uniq,$(filter-out $(firstword $1),$1)))
 NAME	:= term3d
 B_NAME	:= term3d
 CC		:= gcc
-INCLUDE	:= -I./includes
+LIBFTDIR:= ./Libft
+LIBFT	:= $(LIBFTDIR)/libft.a
+INCLUDE	:= -I./includes -I$(LIBFTDIR)
 CFLAGS	:= -g -Wall -Werror -Wextra $(INCLUDE)
-LIBS	:= -lm
+LIBS	:= -lm -L$(LIBFTDIR) -lft
 VPATH	:= srcs/
 
 SRCS	:= main.c error.c key_action.c rotation.c
@@ -35,19 +37,21 @@ DSTRCTR	:= ./destructor.c
 
 all: $(NAME)
 
-$(NAME): $(OBJDIRS) $(OBJS)
+$(NAME): $(LIBFT) $(OBJDIRS) $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBS)
 
 bonus: $(B_FLG)
 
-$(B_FLG): $(OBJDIRS) $(B_OBJS)
+$(B_FLG): $(LIBFT) $(OBJDIRS) $(B_OBJS)
 	$(CC) $(CFLAGS) $(B_OBJS) -o $(NAME) $(LIBS)
 	touch $(B_FLG)
 
 clean: FORCE
+	$(MAKE) clean -C $(LIBFTDIR)
 	$(RM) $(OBJS) $(B_OBJS)
 
 fclean: clean
+	$(MAKE) fclean -C $(LIBFTDIR)
 	$(RM) $(NAME) $(B_NAME)
 	$(RM) -r $(NAME).dSYM $(B_NAME).dSYM
 
@@ -57,6 +61,9 @@ norm: FORCE
 	@printf "$(RED)"; norminette | grep -v ": OK!" \
 	&& exit 1 \
 	|| printf "$(GREEN)%s\n$(END)" "Norm OK!"
+
+$(LIBFT):
+	$(MAKE) bonus -C $(LIBFTDIR)
 
 $(OBJDIRS):
 	mkdir -p $@
@@ -76,20 +83,20 @@ FORCE:
 $(DSTRCTR):
 	curl https://gist.githubusercontent.com/ywake/793a72da8cdae02f093c02fc4d5dc874/raw/destructor.c > $(DSTRCTR)
 
-sani: $(OBJDIRS) $(OBJS)
+sani: $(LIBFT) $(OBJDIRS) $(OBJS)
 	$(CC) $(CFLAGS) -fsanitize=address $(OBJS) -o $(NAME) $(LIBS)
 
-Darwin_leak: $(DSTRCTR) $(OBJDIRS) $(OBJS)
+Darwin_leak: $(LIBFT) $(DSTRCTR) $(OBJDIRS) $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(DSTRCTR) -o $(NAME) $(LIBS)
 
 Linux_leak: sani
 
 leak: $(shell uname)_leak
 
-bonus_sani: $(OBJDIRS) $(B_OBJS)
+bonus_sani: $(LIBFT) $(OBJDIRS) $(B_OBJS)
 	$(CC) $(CFLAGS) -fsanitize=address $(B_OBJS) -o $(B_NAME) $(LIBS)
 
-bonus_Darwin_leak: $(DSTRCTR) $(OBJDIRS) $(B_OBJS)
+bonus_Darwin_leak: $(LIBFT) $(DSTRCTR) $(OBJDIRS) $(B_OBJS)
 	$(CC) $(CFLAGS) $(B_OBJS) $(DSTRCTR) -o $(B_NAME) $(LIBS)
 
 bonus_Linux_leak: bonus_sani
