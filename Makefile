@@ -18,7 +18,7 @@ CFLAGS	:= -g -Wall -Werror -Wextra $(INCLUDE)
 LIBS	:= -lm -L$(LIBFTDIR) -lft
 VPATH	:= srcs/
 
-SRCS	:= main.c error.c key_action.c rotation.c
+SRCS	:= main.c error.c key_action.c rotation.c draw.c object.c
 SRCDIRS	:= $(call uniq, $(dir $(SRCS)))
 
 OBJDIR	:= build/

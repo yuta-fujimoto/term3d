@@ -12,10 +12,7 @@ void	exec_key_action(char key, double screen[TERM_SIZE][TERM_SIZE], t_object *ob
 		rotate_x(object, false);
 	else if (key == 'q')
 		exit(EXIT_SUCCESS);
-	init_screen(screen);
-	project_points(screen, object);
-	printf("\033[%dA", TERM_SIZE);
-	print_screen(screen);
+	draw(screen, object, true);
 }
 
 // https://www.lisz-works.com/entry/c-lang-key-interrupt のコピペ

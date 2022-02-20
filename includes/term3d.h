@@ -17,7 +17,7 @@
 #  define M_PI 3.14159265358979323846
 # endif // !M_PI
 # define ROTATION_ANGLE 45.0 * M_PI / 180.0
-# define VEIW_POINT -50.0
+# define VEIW_POINT -20.0
 # define EXP_RATE 100.0
 # define EPSILON 1.0
 
@@ -37,9 +37,11 @@ typedef struct s_object {
 void	rotate_y(t_object *object, bool isleft);
 void	rotate_x(t_object *object, bool isleft);
 bool	kbhit(void);
-void	exec_key_action(char key, double screen[TERM_SIZE][TERM_SIZE], t_object *object);
-void	init_screen(double screen[TERM_SIZE][TERM_SIZE]);
-void	project_points(double screen[TERM_SIZE][TERM_SIZE], t_object *object);
-void	print_screen(double screen[TERM_SIZE][TERM_SIZE]);
+void	exec_key_action(char key, double screen[TERM_SIZE][TERM_SIZE],
+			t_object *object);
+void	file_to_object(char const *filename, t_object *object);
+void	centerize(t_object *object);
+void	draw(double screen[TERM_SIZE][TERM_SIZE],
+			t_object *object, bool reflesh);
 
 #endif
