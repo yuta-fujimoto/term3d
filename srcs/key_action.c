@@ -1,30 +1,30 @@
 #include "term3d.h"
 
-void exec_key_action(char key, t_point buffer[BUFFER_SIZE],
-	double screen[TERM_SIZE][TERM_SIZE], int size)
+void	exec_key_action(char key, double screen[TERM_SIZE][TERM_SIZE], t_object *object)
 {
 	if (key == 'h')
-		rotate_y(buffer, size, true);
+		rotate_y(object, true);
 	else if (key == 'k')
-		rotate_x(buffer, size, true);
+		rotate_x(object, true);
 	else if (key == 'l')
-		rotate_y(buffer, size, false);
+		rotate_y(object, false);
 	else if (key == 'j')
-		rotate_x(buffer, size, false);
+		rotate_x(object, false);
 	else if (key == 'q')
 		exit(EXIT_SUCCESS);
 	else
 		return ;
 	init_screen(screen);
-	project_points(screen, buffer, size);
+	project_points(screen, object);
 	printf("\x1b[H");
 	print_screen(screen);
 }
 
 // https://www.lisz-works.com/entry/c-lang-key-interrupt のコピペ
-bool kbhit(void)
+bool	kbhit(void)
 {
-	struct termios	oldt, newt;
+	struct termios	oldt;
+	struct termios	newt;
 	int				ch;
 	int				oldf;
 
