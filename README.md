@@ -1,4 +1,5 @@
 # term3d
+[![Norminette](https://github.com/yuta-fujimoto/term3d/actions/workflows/norm.yml/badge.svg)](https://github.com/yuta-fujimoto/term3d/actions/workflows/norm.yml) [![Test](https://github.com/yuta-fujimoto/term3d/actions/workflows/test.yml/badge.svg)](https://github.com/yuta-fujimoto/term3d/actions/workflows/test.yml)
 ```
 make
 ./term3d torus.3d
