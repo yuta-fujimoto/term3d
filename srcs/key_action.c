@@ -12,11 +12,9 @@ void	exec_key_action(char key, double screen[TERM_SIZE][TERM_SIZE], t_object *ob
 		rotate_x(object, false);
 	else if (key == 'q')
 		exit(EXIT_SUCCESS);
-	else
-		return ;
 	init_screen(screen);
 	project_points(screen, object);
-	printf("\x1b[H");
+	printf("\033[%dA", TERM_SIZE);
 	print_screen(screen);
 }
 
