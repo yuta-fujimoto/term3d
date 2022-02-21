@@ -3,24 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fyuta <fyuta@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: ywake <ywake@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:31:20 by ywake             #+#    #+#             */
-/*   Updated: 2022/02/21 14:34:02 by fyuta            ###   ########.fr       */
+/*   Updated: 2022/02/21 15:48:36 by ywake            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "term3d.h"
-
-// 0 ~ TERM_SIZEの範囲に切り詰め
-int	clamp(int v)
-{
-	if (v >= TERM_SIZE)
-		return (TERM_SIZE - 1);
-	if (v < 0)
-		return (0);
-	return (v);
-}
 
 void	init_screen(double screen[TERM_SIZE][TERM_SIZE])
 {
@@ -62,19 +52,35 @@ void	project_points(double screen[TERM_SIZE][TERM_SIZE], t_object *object)
 
 void	print_screen(double screen[TERM_SIZE][TERM_SIZE])
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
+	double	closest;
+	double	farthest;
 
+	closest = 0.0;
+	farthest = 0.0;
 	y = -1;
 	while (++y < TERM_SIZE)
 	{
 		x = -1;
 		while (++x < TERM_SIZE)
 		{
-			if (screen[x][y] > 0.0)
-				printf(". ");
-			else
-				printf("  ");
+			printf("%f, ", screen[x][y]);
+			if (farthest < screen[x][y])
+				farthest = screen[x][y];
+			if (closest == 0.0 || closest > screen[x][y])
+				closest = screen[x][y];
+		}
+	}
+	y = -1;
+	while (++y < TERM_SIZE / 2)
+	{
+		x = -1;
+		while (++x < TERM_SIZE)
+		{
+			print_with_shade(
+				closest, farthest,
+				(screen[x][y * 2] + screen[x][y * 2 + 1]) / 2);
 		}
 		printf("\n");
 	}
@@ -86,6 +92,6 @@ void	draw(double screen[TERM_SIZE][TERM_SIZE],
 	init_screen(screen);
 	project_points(screen, object);
 	if (reflesh)
-		printf("\033[%dA", TERM_SIZE);
+		printf("\033[%dA", TERM_SIZE / 2);
 	print_screen(screen);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   term3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fyuta <fyuta@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: ywake <ywake@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 14:18:39 by fyuta             #+#    #+#             */
-/*   Updated: 2022/02/21 14:18:42 by fyuta            ###   ########.fr       */
+/*   Updated: 2022/02/21 15:41:47 by ywake            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846
 # endif // !M_PI
-# define ROTATION_ANGLE 45.0 * M_PI / 180.0
+# define ROTATION_ANGLE 15.0 * M_PI / 180.0
 # define TRANSLATION_STEP 2.0
 # define VEIW_POINT -20.0
 # define EXP_RATE 100.0
@@ -58,5 +58,6 @@ void	draw(double screen[TERM_SIZE][TERM_SIZE],
 			t_object *object, bool reflesh);
 void	translate_x(t_object *object, bool isplus);
 void	translate_y(t_object *object, bool isplus);
+void	print_with_shade(double closest, double farthest, double distance);
 
 #endif
