@@ -6,7 +6,7 @@
 /*   By: fyuta <fyuta@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 14:17:59 by fyuta             #+#    #+#             */
-/*   Updated: 2022/02/21 14:41:06 by fyuta            ###   ########.fr       */
+/*   Updated: 2022/02/21 17:39:12 by fyuta            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,17 +56,13 @@ bool	kbhit(void)
 	tcsetattr(STDIN_FILENO, TCSANOW, &newt);
 	oldf = fcntl(STDIN_FILENO, F_GETFL, 0);
 	fcntl(STDIN_FILENO, F_SETFL, oldf | O_NONBLOCK);
-
 	ch = getchar();
-
 	tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
 	fcntl(STDIN_FILENO, F_SETFL, oldf);
-
 	if (ch != EOF)
 	{
 		ungetc(ch, stdin);
 		return (true);
 	}
-
 	return (false);
 }
