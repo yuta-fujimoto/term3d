@@ -6,7 +6,7 @@
 /*   By: fyuta <fyuta@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 14:17:59 by fyuta             #+#    #+#             */
-/*   Updated: 2022/02/21 14:18:02 by fyuta            ###   ########.fr       */
+/*   Updated: 2022/02/21 14:41:06 by fyuta            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@ void	exec_key_action(char key, double screen[TERM_SIZE][TERM_SIZE],
 		translate_y(object, true);
 	else if (key == 's')
 		translate_y(object, false);
+	else if (key == '+')
+		object->camera.z += TRANSLATION_STEP;
+	else if (key == '-')
+		object->camera.z -= TRANSLATION_STEP;
+	else if (key == '0')
+		object->camera = (t_point){.z = VEIW_POINT};
 	else if (key == '\e')
 		exit(EXIT_SUCCESS);
 	draw(screen, object, true);

@@ -6,7 +6,7 @@
 /*   By: fyuta <fyuta@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:31:20 by ywake             #+#    #+#             */
-/*   Updated: 2022/02/21 14:14:39 by fyuta            ###   ########.fr       */
+/*   Updated: 2022/02/21 14:34:02 by fyuta            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	project_points(double screen[TERM_SIZE][TERM_SIZE], t_object *object)
 	while (current)
 	{
 		point = (t_point *)current->content;
-		z = (point->z - VEIW_POINT) / EXP_RATE;
+		z = (point->z - object->camera.z) / EXP_RATE;
 		x = round(point->x / z + TERM_SIZE / 2.0) - object->camera.x;
 		y = round(TERM_SIZE / 2.0 - point->y / z) - object->camera.y;
 		current = current->next;

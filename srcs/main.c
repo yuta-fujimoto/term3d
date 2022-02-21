@@ -6,7 +6,7 @@
 /*   By: fyuta <fyuta@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 14:19:28 by fyuta             #+#    #+#             */
-/*   Updated: 2022/02/21 14:19:30 by fyuta            ###   ########.fr       */
+/*   Updated: 2022/02/21 14:38:32 by fyuta            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ int	main(int ac, char const **av)
 	arg_validation(ac, av);
 	file_to_object(av[1], &object);
 	centerize(&object);
+	object.camera = (t_point){.z = VEIW_POINT};
 	draw(screen, &object, false);
-	object.camera = (t_point){};
 	while (1)
 	{
 		if (kbhit())
