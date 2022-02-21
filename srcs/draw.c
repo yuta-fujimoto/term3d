@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ywake <ywake@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: fyuta <fyuta@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:31:20 by ywake             #+#    #+#             */
-/*   Updated: 2022/02/20 18:39:37 by ywake            ###   ########.fr       */
+/*   Updated: 2022/02/21 14:14:39 by fyuta            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,13 @@ void	project_points(double screen[TERM_SIZE][TERM_SIZE], t_object *object)
 	{
 		point = (t_point *)current->content;
 		z = (point->z - VEIW_POINT) / EXP_RATE;
-		x = clamp(round(point->x / z + TERM_SIZE / 2.0));
-		y = clamp(round(TERM_SIZE / 2.0 - point->y / z));
+		x = round(point->x / z + TERM_SIZE / 2.0) - object->camera.x;
+		y = round(TERM_SIZE / 2.0 - point->y / z) - object->camera.y;
+		current = current->next;
+		if (x >= TERM_SIZE || x < 0 || y >= TERM_SIZE || y < 0)
+			continue ;
 		if (screen[x][y] > z * EXP_RATE || screen[x][y] == 0.0)
 			screen[x][y] = z * EXP_RATE;
-		current = current->next;
 	}
 }
 

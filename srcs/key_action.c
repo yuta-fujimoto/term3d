@@ -1,16 +1,37 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   key_action.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fyuta <fyuta@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/21 14:17:59 by fyuta             #+#    #+#             */
+/*   Updated: 2022/02/21 14:18:02 by fyuta            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "term3d.h"
 
-void	exec_key_action(char key, double screen[TERM_SIZE][TERM_SIZE], t_object *object)
+void	exec_key_action(char key, double screen[TERM_SIZE][TERM_SIZE],
+			t_object *object)
 {
-	if (key == 'h')
+	if (key == 'q')
 		rotate_y(object, true);
-	else if (key == 'k')
-		rotate_x(object, true);
-	else if (key == 'l')
-		rotate_y(object, false);
-	else if (key == 'j')
+	else if (key == 'f')
 		rotate_x(object, false);
-	else if (key == 'q')
+	else if (key == 'r')
+		rotate_x(object, true);
+	else if (key == 'e')
+		rotate_y(object, false);
+	else if (key == 'd')
+		translate_x(object, true);
+	else if (key == 'a')
+		translate_x(object, false);
+	else if (key == 'w')
+		translate_y(object, true);
+	else if (key == 's')
+		translate_y(object, false);
+	else if (key == '\e')
 		exit(EXIT_SUCCESS);
 	draw(screen, object, true);
 }

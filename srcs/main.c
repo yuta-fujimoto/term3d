@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fyuta <fyuta@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/21 14:19:28 by fyuta             #+#    #+#             */
+/*   Updated: 2022/02/21 14:19:30 by fyuta            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "term3d.h"
 #include "error.h"
 
@@ -23,6 +35,7 @@ int	main(int ac, char const **av)
 	file_to_object(av[1], &object);
 	centerize(&object);
 	draw(screen, &object, false);
+	object.camera = (t_point){};
 	while (1)
 	{
 		if (kbhit())

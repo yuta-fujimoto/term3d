@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   term3d.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fyuta <fyuta@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/21 14:18:39 by fyuta             #+#    #+#             */
+/*   Updated: 2022/02/21 14:18:42 by fyuta            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef TERM3D_H
 # define TERM3D_H
 
@@ -17,10 +29,10 @@
 #  define M_PI 3.14159265358979323846
 # endif // !M_PI
 # define ROTATION_ANGLE 45.0 * M_PI / 180.0
+# define TRANSLATION_STEP 2.0
 # define VEIW_POINT -20.0
 # define EXP_RATE 100.0
 # define EPSILON 1.0
-
 typedef struct s_point {
 	double	x;
 	double	y;
@@ -29,8 +41,9 @@ typedef struct s_point {
 }	t_point;
 
 typedef struct s_object {
-	int		size;
-	t_list	*points;
+	int			size;
+	t_list		*points;
+	t_point		camera;
 
 }	t_object;
 
@@ -43,5 +56,7 @@ void	file_to_object(char const *filename, t_object *object);
 void	centerize(t_object *object);
 void	draw(double screen[TERM_SIZE][TERM_SIZE],
 			t_object *object, bool reflesh);
+void	translate_x(t_object *object, bool isplus);
+void	translate_y(t_object *object, bool isplus);
 
 #endif
