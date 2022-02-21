@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shade.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fyuta <fyuta@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: ywake <ywake@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 14:55:39 by ywake             #+#    #+#             */
-/*   Updated: 2022/02/21 17:32:45 by fyuta            ###   ########.fr       */
+/*   Updated: 2022/02/21 17:56:02 by ywake            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ void	print_with_shade(double closest, double farthest, double distance)
 		printf("  ");
 		return ;
 	}
-	level = (farthest - closest) / CHARSET_LEN;
+	if (farthest == closest)
+		level = 1;
+	else
+		level = (farthest - closest) / CHARSET_LEN;
 	c = charset[(int)floor((distance - closest) / level)];
 	printf("%c%c", c, c);
 }
