@@ -6,21 +6,11 @@
 /*   By: fyuta <fyuta@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:31:20 by ywake             #+#    #+#             */
-/*   Updated: 2022/02/21 14:34:02 by fyuta            ###   ########.fr       */
+/*   Updated: 2022/02/21 17:04:33 by fyuta            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "term3d.h"
-
-// 0 ~ TERM_SIZEの範囲に切り詰め
-int	clamp(int v)
-{
-	if (v >= TERM_SIZE)
-		return (TERM_SIZE - 1);
-	if (v < 0)
-		return (0);
-	return (v);
-}
 
 void	init_screen(double screen[TERM_SIZE][TERM_SIZE])
 {
@@ -46,6 +36,8 @@ void	project_points(double screen[TERM_SIZE][TERM_SIZE], t_object *object)
 	t_point	*point;
 
 	current = object->points;
+	object->closest = 0.0;
+	object->farthest = 0.0;
 	while (current)
 	{
 		point = (t_point *)current->content;
@@ -53,6 +45,10 @@ void	project_points(double screen[TERM_SIZE][TERM_SIZE], t_object *object)
 		x = round(point->x / z + TERM_SIZE / 2.0) - object->camera.x;
 		y = round(TERM_SIZE / 2.0 - point->y / z) - object->camera.y;
 		current = current->next;
+		if (z * EXP_RATE > object->farthest || object->farthest == 0.0)
+			object->farthest = z * EXP_RATE;
+		if (z * EXP_RATE < object->closest || object->closest == 0.0)
+			object->closest = z * EXP_RATE;
 		if (x >= TERM_SIZE || x < 0 || y >= TERM_SIZE || y < 0)
 			continue ;
 		if (screen[x][y] > z * EXP_RATE || screen[x][y] == 0.0)
@@ -60,10 +56,10 @@ void	project_points(double screen[TERM_SIZE][TERM_SIZE], t_object *object)
 	}
 }
 
-void	print_screen(double screen[TERM_SIZE][TERM_SIZE])
+void	print_screen(double screen[TERM_SIZE][TERM_SIZE], t_object *object)
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
 
 	y = -1;
 	while (++y < TERM_SIZE)
@@ -71,10 +67,9 @@ void	print_screen(double screen[TERM_SIZE][TERM_SIZE])
 		x = -1;
 		while (++x < TERM_SIZE)
 		{
-			if (screen[x][y] > 0.0)
-				printf(". ");
-			else
-				printf("  ");
+			print_with_shade(
+				object->closest, object->farthest,
+				screen[x][y]);
 		}
 		printf("\n");
 	}
@@ -87,5 +82,5 @@ void	draw(double screen[TERM_SIZE][TERM_SIZE],
 	project_points(screen, object);
 	if (reflesh)
 		printf("\033[%dA", TERM_SIZE);
-	print_screen(screen);
+	print_screen(screen, object);
 }
