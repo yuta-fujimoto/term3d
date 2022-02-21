@@ -6,7 +6,7 @@
 /*   By: fyuta <fyuta@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 14:19:47 by fyuta             #+#    #+#             */
-/*   Updated: 2022/02/21 14:19:49 by fyuta            ###   ########.fr       */
+/*   Updated: 2022/02/21 17:33:38 by fyuta            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	rotate_y(t_object *object, bool isleft)
 	t_point	*point;
 
 	if (isleft)
-		angle = ROTATION_ANGLE;
+		angle = ROTATION_ANGLE * M_PI / 180.0;
 	else
-		angle = -ROTATION_ANGLE;
+		angle = -ROTATION_ANGLE * M_PI / 180.0;
 	current = object->points;
 	while (current)
 	{
@@ -47,9 +47,9 @@ void	rotate_x(t_object *object, bool isleft)
 	t_point	*point;
 
 	if (isleft)
-		angle = ROTATION_ANGLE;
+		angle = ROTATION_ANGLE * M_PI / 180.0;
 	else
-		angle = -ROTATION_ANGLE;
+		angle = -ROTATION_ANGLE * M_PI / 180.0;
 	current = object->points;
 	while (current)
 	{
