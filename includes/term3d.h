@@ -6,7 +6,7 @@
 /*   By: ywake <ywake@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 14:18:39 by fyuta             #+#    #+#             */
-/*   Updated: 2022/02/22 12:33:09 by ywake            ###   ########.fr       */
+/*   Updated: 2022/02/22 12:47:19 by ywake            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,6 @@ void	centerize(t_object *object);
 void	draw(t_screen screen, t_object *object);
 void	translate_x(t_object *object, bool isplus);
 void	translate_y(t_object *object, bool isplus);
-void	print_with_shade(double closest, double farthest, double distance);
+char	shader(double closest, double farthest, double distance);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ywake <ywake@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:31:20 by ywake             #+#    #+#             */
-/*   Updated: 2022/02/22 12:32:35 by ywake            ###   ########.fr       */
+/*   Updated: 2022/02/22 12:56:14 by ywake            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,18 +60,16 @@ void	print_screen(t_screen screen, t_object *object)
 {
 	int		x;
 	int		y;
+	char	line[TERM_SIZE_X + 1];
 
+	line[TERM_SIZE_X] = '\0';
 	y = -1;
 	while (++y < TERM_SIZE_Y)
 	{
 		x = -1;
 		while (++x < TERM_SIZE_X)
-		{
-			print_with_shade(
-				object->closest, object->farthest,
-				screen[x][y]);
-		}
-		printf("\n");
+			line[x] = shader(object->closest, object->farthest, screen[x][y]);
+		printf("%s\n", line);
 	}
 }
 
