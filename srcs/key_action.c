@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_action.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ywake <ywake@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: fyuta <fyuta@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 14:17:59 by fyuta             #+#    #+#             */
-/*   Updated: 2022/02/22 11:21:05 by ywake            ###   ########.fr       */
+/*   Updated: 2022/02/22 15:54:47 by fyuta            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ void	exec_key_action(char key, t_object *object)
 	else if (key == 's')
 		translate_y(object, false);
 	else if (key == '+')
-		object->camera.z += TRANSLATION_STEP;
+		object->camera.pos.z += TRANSLATION_STEP;
 	else if (key == '-')
-		object->camera.z -= TRANSLATION_STEP;
+		object->camera.pos.z -= TRANSLATION_STEP;
 	else if (key == '0')
-		object->camera = (t_point){.z = VEIW_POINT};
+		object->camera = (t_camera){.pos.z = VEIW_POINT};
 	else if (key == '\e')
 		exit(EXIT_SUCCESS);
 }

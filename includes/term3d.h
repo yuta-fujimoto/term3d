@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   term3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ywake <ywake@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: fyuta <fyuta@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 14:18:39 by fyuta             #+#    #+#             */
-/*   Updated: 2022/02/22 12:47:19 by ywake            ###   ########.fr       */
+/*   Updated: 2022/02/22 16:18:04 by fyuta            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,17 @@ typedef struct s_point {
 
 }	t_point;
 
+typedef struct s_camera {
+	t_point	pos;
+	double	angle_x;
+	double	angle_y;
+
+}	t_camera;
+
 typedef struct s_object {
 	int			size;
 	t_list		*points;
-	t_point		camera;
+	t_camera	camera;
 	double		closest;
 	double		farthest;
 
@@ -53,6 +60,7 @@ typedef double	t_screen[TERM_SIZE_X][TERM_SIZE_Y];
 
 void	rotate_y(t_object *object, bool isleft);
 void	rotate_x(t_object *object, bool isleft);
+void	rotate_point(t_point *point, t_camera *camera);
 bool	kbhit(void);
 void	exec_key_action(char key, t_object *object);
 void	file_to_object(char const *filename, t_object *object);
@@ -60,6 +68,7 @@ void	centerize(t_object *object);
 void	draw(t_screen screen, t_object *object);
 void	translate_x(t_object *object, bool isplus);
 void	translate_y(t_object *object, bool isplus);
+void	translate_point(t_point *point, t_camera *camera);
 char	shader(double closest, double farthest, double distance);
 
 #endif

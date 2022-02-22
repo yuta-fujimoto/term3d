@@ -6,7 +6,7 @@
 /*   By: fyuta <fyuta@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:31:20 by ywake             #+#    #+#             */
-/*   Updated: 2022/02/22 15:51:39 by fyuta            ###   ########.fr       */
+/*   Updated: 2022/02/22 16:19:34 by fyuta            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ void	init_screen(t_screen screen)
 	}
 }
 
-t_point	move_point_by_camera(t_point *point, t_point *camera)
+t_point	move_point_by_camera(t_point *point, t_camera *camera)
 {
-	t_point	moved;
+	t_point	moved_point;
 
-	moved.x = point->x - camera->x;
-	moved.y = point->y - camera->y;
-	moved.z = point->z - camera->z;
-	return (moved);
+	moved_point = *point;
+	rotate_point(&moved_point, camera);
+	translate_point(&moved_point, camera);
+	return (moved_point);
 }
 
 // 透視投影
