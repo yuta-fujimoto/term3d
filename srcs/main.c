@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fyuta <fyuta@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: ywake <ywake@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 14:19:28 by fyuta             #+#    #+#             */
-/*   Updated: 2022/02/21 14:38:32 by fyuta            ###   ########.fr       */
+/*   Updated: 2022/02/22 11:31:25 by ywake            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,21 @@ void	arg_validation(int argc, char const *argv[])
 int	main(int ac, char const **av)
 {
 	t_object	object;
-	double		screen[TERM_SIZE][TERM_SIZE];
+	t_screen	screen;
 
 	arg_validation(ac, av);
 	file_to_object(av[1], &object);
 	centerize(&object);
 	object.camera = (t_point){.z = VEIW_POINT};
-	draw(screen, &object, false);
+	draw(screen, &object);
 	while (1)
 	{
 		if (kbhit())
-			exec_key_action(getchar(), screen, &object);
+		{
+			exec_key_action(getchar(), &object);
+			printf("\033[%dA", TERM_SIZE);
+			draw(screen, &object);
+		}
 	}
 	ft_lstclear(&object.points, free);
 }

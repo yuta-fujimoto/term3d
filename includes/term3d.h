@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   term3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fyuta <fyuta@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: ywake <ywake@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 14:18:39 by fyuta             #+#    #+#             */
-/*   Updated: 2022/02/21 17:34:38 by fyuta            ###   ########.fr       */
+/*   Updated: 2022/02/22 11:31:19 by ywake            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,16 @@ typedef struct s_object {
 
 }	t_object;
 
+// double screen[x][y]
+typedef double	t_screen[TERM_SIZE][TERM_SIZE];
+
 void	rotate_y(t_object *object, bool isleft);
 void	rotate_x(t_object *object, bool isleft);
 bool	kbhit(void);
-void	exec_key_action(char key, double screen[TERM_SIZE][TERM_SIZE],
-			t_object *object);
+void	exec_key_action(char key, t_object *object);
 void	file_to_object(char const *filename, t_object *object);
 void	centerize(t_object *object);
-void	draw(double screen[TERM_SIZE][TERM_SIZE],
-			t_object *object, bool reflesh);
+void	draw(t_screen screen, t_object *object);
 void	translate_x(t_object *object, bool isplus);
 void	translate_y(t_object *object, bool isplus);
 void	print_with_shade(double closest, double farthest, double distance);

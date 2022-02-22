@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fyuta <fyuta@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: ywake <ywake@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:31:20 by ywake             #+#    #+#             */
-/*   Updated: 2022/02/21 17:04:33 by fyuta            ###   ########.fr       */
+/*   Updated: 2022/02/22 11:31:09 by ywake            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "term3d.h"
 
-void	init_screen(double screen[TERM_SIZE][TERM_SIZE])
+void	init_screen(t_screen screen)
 {
 	int	x;
 	int	y;
@@ -27,7 +27,7 @@ void	init_screen(double screen[TERM_SIZE][TERM_SIZE])
 }
 
 // 透視投影
-void	project_points(double screen[TERM_SIZE][TERM_SIZE], t_object *object)
+void	project_points(t_screen screen, t_object *object)
 {
 	int		x;
 	int		y;
@@ -56,7 +56,7 @@ void	project_points(double screen[TERM_SIZE][TERM_SIZE], t_object *object)
 	}
 }
 
-void	print_screen(double screen[TERM_SIZE][TERM_SIZE], t_object *object)
+void	print_screen(t_screen screen, t_object *object)
 {
 	int		x;
 	int		y;
@@ -75,12 +75,9 @@ void	print_screen(double screen[TERM_SIZE][TERM_SIZE], t_object *object)
 	}
 }
 
-void	draw(double screen[TERM_SIZE][TERM_SIZE],
-				t_object *object, bool reflesh)
+void	draw(t_screen screen, t_object *object)
 {
 	init_screen(screen);
 	project_points(screen, object);
-	if (reflesh)
-		printf("\033[%dA", TERM_SIZE);
 	print_screen(screen, object);
 }

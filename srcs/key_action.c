@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   key_action.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fyuta <fyuta@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: ywake <ywake@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 14:17:59 by fyuta             #+#    #+#             */
-/*   Updated: 2022/02/21 17:39:12 by fyuta            ###   ########.fr       */
+/*   Updated: 2022/02/22 11:21:05 by ywake            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "term3d.h"
 
-void	exec_key_action(char key, double screen[TERM_SIZE][TERM_SIZE],
-			t_object *object)
+void	exec_key_action(char key, t_object *object)
 {
 	if (key == 'q')
 		rotate_y(object, true);
@@ -39,7 +38,6 @@ void	exec_key_action(char key, double screen[TERM_SIZE][TERM_SIZE],
 		object->camera = (t_point){.z = VEIW_POINT};
 	else if (key == '\e')
 		exit(EXIT_SUCCESS);
-	draw(screen, object, true);
 }
 
 // https://www.lisz-works.com/entry/c-lang-key-interrupt のコピペ
