@@ -6,7 +6,7 @@
 /*   By: fyuta <fyuta@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 14:19:28 by fyuta             #+#    #+#             */
-/*   Updated: 2022/02/22 15:54:12 by fyuta            ###   ########.fr       */
+/*   Updated: 2022/02/22 19:40:59 by fyuta            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	main(int ac, char const **av)
 		if (kbhit())
 		{
 			exec_key_action(getchar(), &object);
+			printf("\033[%dA", TERM_SIZE_Y);
 			draw(screen, &object);
 		}
 	}

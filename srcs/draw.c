@@ -6,7 +6,7 @@
 /*   By: fyuta <fyuta@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:31:20 by ywake             #+#    #+#             */
-/*   Updated: 2022/02/22 16:19:34 by fyuta            ###   ########.fr       */
+/*   Updated: 2022/02/22 19:40:26 by fyuta            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,7 @@ void	print_screen(t_screen screen, t_object *object)
 
 void	draw(t_screen screen, t_object *object)
 {
-	static bool	init = true;
-
 	init_screen(screen);
 	project_points(screen, object);
-	if (!init)
-		printf("\033[%dA", TERM_SIZE_Y);
-	init = false;
 	print_screen(screen, object);
 }
