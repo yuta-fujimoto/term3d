@@ -6,7 +6,7 @@
 /*   By: ywake <ywake@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 14:55:39 by ywake             #+#    #+#             */
-/*   Updated: 2022/02/22 11:54:17 by ywake            ###   ########.fr       */
+/*   Updated: 2022/02/22 12:01:57 by ywake            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	print_with_shade(double closest, double farthest, double distance)
 
 	if (distance <= 0.0)
 	{
-		printf("  ");
+		printf(" ");
 		return ;
 	}
 	if (farthest == closest)
@@ -28,5 +28,5 @@ void	print_with_shade(double closest, double farthest, double distance)
 	else
 		level = (farthest - closest) / strlen(CHARSET);
 	c = CHARSET[(int)floor((distance - closest) / level)];
-	printf("%c%c", c, c);
+	printf("%c", c);
 }
