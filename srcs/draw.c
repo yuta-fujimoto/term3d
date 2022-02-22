@@ -6,7 +6,7 @@
 /*   By: ywake <ywake@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:31:20 by ywake             #+#    #+#             */
-/*   Updated: 2022/02/22 11:31:09 by ywake            ###   ########.fr       */
+/*   Updated: 2022/02/22 12:32:35 by ywake            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	init_screen(t_screen screen)
 	int	y;
 
 	y = -1;
-	while (++y < TERM_SIZE)
+	while (++y < TERM_SIZE_Y)
 	{
 		x = -1;
-		while (++x < TERM_SIZE)
+		while (++x < TERM_SIZE_X)
 			screen[x][y] = 0.0;
 	}
 }
@@ -42,14 +42,14 @@ void	project_points(t_screen screen, t_object *object)
 	{
 		point = (t_point *)current->content;
 		z = (point->z - object->camera.z) / EXP_RATE;
-		x = round(point->x / z + TERM_SIZE / 2.0) - object->camera.x;
-		y = round(TERM_SIZE / 2.0 - point->y / z) - object->camera.y;
+		x = round(point->x / z + TERM_SIZE_X / 2.0) - object->camera.x;
+		y = round(TERM_SIZE_Y / 2.0 - point->y / z / 2) - object->camera.y;
 		current = current->next;
 		if (z * EXP_RATE > object->farthest || object->farthest == 0.0)
 			object->farthest = z * EXP_RATE;
 		if (z * EXP_RATE < object->closest || object->closest == 0.0)
 			object->closest = z * EXP_RATE;
-		if (x >= TERM_SIZE || x < 0 || y >= TERM_SIZE || y < 0)
+		if (x >= TERM_SIZE_X || x < 0 || y >= TERM_SIZE_Y || y < 0)
 			continue ;
 		if (screen[x][y] > z * EXP_RATE || screen[x][y] == 0.0)
 			screen[x][y] = z * EXP_RATE;
@@ -62,10 +62,10 @@ void	print_screen(t_screen screen, t_object *object)
 	int		y;
 
 	y = -1;
-	while (++y < TERM_SIZE)
+	while (++y < TERM_SIZE_Y)
 	{
 		x = -1;
-		while (++x < TERM_SIZE)
+		while (++x < TERM_SIZE_X)
 		{
 			print_with_shade(
 				object->closest, object->farthest,

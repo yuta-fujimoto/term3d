@@ -29,6 +29,8 @@ B_SRCS	:= $(SRCS)
 B_OBJS	:= $(B_SRCS:%.c=$(SRCDIR)%.o)
 B_FLG	:= .bonus_flg
 
+DEPS	:= $(addprefix $(OBJDIR), $(SRCS:%.c=%.d))
+
 DSTRCTR	:= ./destructor.c
 
 #################
@@ -48,7 +50,7 @@ $(B_FLG): $(LIBFT) $(OBJDIRS) $(B_OBJS)
 
 clean: FORCE
 	$(MAKE) clean -C $(LIBFTDIR)
-	$(RM) $(OBJS) $(B_OBJS)
+	$(RM) $(OBJS) $(B_OBJS) $(DEPS)
 
 fclean: clean
 	$(MAKE) fclean -C $(LIBFTDIR)
@@ -70,8 +72,10 @@ $(OBJDIRS):
 
 $(OBJDIR)%.o: %.c
 	@printf "$(THIN)$(ITALIC)"
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -MMD -MP -c $< -o $@
 	@printf "$(END)"
+
+-include $(DEPS)
 
 .PHONY: FORCE
 FORCE:

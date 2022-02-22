@@ -6,7 +6,7 @@
 /*   By: ywake <ywake@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 14:18:39 by fyuta             #+#    #+#             */
-/*   Updated: 2022/02/22 11:31:19 by ywake            ###   ########.fr       */
+/*   Updated: 2022/02/22 12:33:09 by ywake            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,14 @@
 # include <string.h>
 # include "libft.h"
 
-# define TERM_SIZE 30
+# define TERM_SIZE_X 60
+# define TERM_SIZE_Y 30
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846
 # endif // !M_PI
 # define ROTATION_ANGLE 15.0
 # define TRANSLATION_STEP 2.0
-# define VEIW_POINT -30.0
+# define VEIW_POINT -15.0
 # define EXP_RATE 100.0
 # define EPSILON 1.0
 typedef struct s_point {
@@ -48,8 +49,7 @@ typedef struct s_object {
 
 }	t_object;
 
-// double screen[x][y]
-typedef double	t_screen[TERM_SIZE][TERM_SIZE];
+typedef double	t_screen[TERM_SIZE_X][TERM_SIZE_Y];
 
 void	rotate_y(t_object *object, bool isleft);
 void	rotate_x(t_object *object, bool isleft);
