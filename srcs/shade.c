@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shade.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ywake <ywake@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: fyuta <fyuta@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 14:55:39 by ywake             #+#    #+#             */
-/*   Updated: 2022/02/22 12:47:03 by ywake            ###   ########.fr       */
+/*   Updated: 2022/02/22 17:34:27 by fyuta            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	shader(double closest, double farthest, double distance)
 	if (farthest == closest)
 		level = 1;
 	else
-		level = (farthest - closest) / strlen(CHARSET);
+		level = (farthest - closest) / (strlen(CHARSET) - 1);
 	c = CHARSET[(int)floor((distance - closest) / level)];
 	return (c);
 }
