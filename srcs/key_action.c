@@ -6,7 +6,7 @@
 /*   By: ywake <ywake@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 14:17:59 by fyuta             #+#    #+#             */
-/*   Updated: 2022/02/22 11:21:05 by ywake            ###   ########.fr       */
+/*   Updated: 2022/02/23 14:21:17 by ywake            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	exec_key_action(char key, t_object *object)
 		object->camera.z -= TRANSLATION_STEP;
 	else if (key == '0')
 		object->camera = (t_point){.z = VEIW_POINT};
-	else if (key == '\e')
+	else if (key == 'x')
 		exit(EXIT_SUCCESS);
 }
 
