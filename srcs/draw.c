@@ -6,11 +6,13 @@
 /*   By: ywake <ywake@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:31:20 by ywake             #+#    #+#             */
-/*   Updated: 2022/02/22 12:56:14 by ywake            ###   ########.fr       */
+/*   Updated: 2022/02/23 14:13:25 by ywake            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "term3d.h"
+#include <float.h>
+#include "utils.h"
 
 void	init_screen(t_screen screen)
 {
@@ -18,10 +20,10 @@ void	init_screen(t_screen screen)
 	int	y;
 
 	y = -1;
-	while (++y < TERM_SIZE_Y)
+	while (++y < HEIGHT)
 	{
 		x = -1;
-		while (++x < TERM_SIZE_X)
+		while (++x < WIDTH)
 			screen[x][y] = 0.0;
 	}
 }
@@ -36,23 +38,20 @@ void	project_points(t_screen screen, t_object *object)
 	t_point	*point;
 
 	current = object->points;
-	object->closest = 0.0;
-	object->farthest = 0.0;
+	object->closest = DBL_MAX;
+	object->farthest = -DBL_MAX;
 	while (current)
 	{
 		point = (t_point *)current->content;
 		z = (point->z - object->camera.z) / EXP_RATE;
-		x = round(point->x / z + TERM_SIZE_X / 2.0) - object->camera.x;
-		y = round(TERM_SIZE_Y / 2.0 - point->y / z / 2) - object->camera.y;
+		x = round(point->x / z + WIDTH / 2.0) - object->camera.x;
+		y = round(HEIGHT / 2.0 - point->y / (2.0 * z)) - object->camera.y;
+		object->farthest = fmax(z * EXP_RATE, object->farthest);
+		object->closest = fmin(z * EXP_RATE, object->closest);
+		if (is_range(0, x, WIDTH) && is_range(0, y, HEIGHT))
+			if (screen[x][y] == 0.0 || (z > 0 && screen[x][y] > z * EXP_RATE))
+				screen[x][y] = z * EXP_RATE;
 		current = current->next;
-		if (z * EXP_RATE > object->farthest || object->farthest == 0.0)
-			object->farthest = z * EXP_RATE;
-		if (z * EXP_RATE < object->closest || object->closest == 0.0)
-			object->closest = z * EXP_RATE;
-		if (x >= TERM_SIZE_X || x < 0 || y >= TERM_SIZE_Y || y < 0)
-			continue ;
-		if (screen[x][y] > z * EXP_RATE || screen[x][y] == 0.0)
-			screen[x][y] = z * EXP_RATE;
 	}
 }
 
@@ -60,14 +59,14 @@ void	print_screen(t_screen screen, t_object *object)
 {
 	int		x;
 	int		y;
-	char	line[TERM_SIZE_X + 1];
+	char	line[WIDTH + 1];
 
-	line[TERM_SIZE_X] = '\0';
+	line[WIDTH] = '\0';
 	y = -1;
-	while (++y < TERM_SIZE_Y)
+	while (++y < HEIGHT)
 	{
 		x = -1;
-		while (++x < TERM_SIZE_X)
+		while (++x < WIDTH)
 			line[x] = shader(object->closest, object->farthest, screen[x][y]);
 		printf("%s\n", line);
 	}
