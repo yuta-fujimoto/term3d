@@ -6,7 +6,7 @@
 /*   By: ywake <ywake@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 13:02:21 by ywake             #+#    #+#             */
-/*   Updated: 2022/02/23 13:35:18 by ywake            ###   ########.fr       */
+/*   Updated: 2022/02/23 14:47:54 by ywake            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 bool	is_range(int min, int value, int max)
 {
-	if (min >= value)
+	if (value < min)
 		return (false);
-	if (max < value)
+	if (value >= max)
 		return (false);
 	return (true);
 }
