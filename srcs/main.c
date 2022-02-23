@@ -6,7 +6,7 @@
 /*   By: ywake <ywake@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 14:19:28 by fyuta             #+#    #+#             */
-/*   Updated: 2022/02/23 14:55:43 by ywake            ###   ########.fr       */
+/*   Updated: 2022/02/23 16:27:00 by ywake            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	main(int ac, char const **av)
 	{
 		if (kbhit())
 		{
-			exec_key_action(getchar(), &object);
+			exec_key_action(if_err(getchar(), "getchar"), &object);
 			draw(screen, &object);
 		}
 	}

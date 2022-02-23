@@ -6,11 +6,12 @@
 /*   By: ywake <ywake@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 14:17:59 by fyuta             #+#    #+#             */
-/*   Updated: 2022/02/23 16:12:50 by ywake            ###   ########.fr       */
+/*   Updated: 2022/02/23 16:26:24 by ywake            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "term3d.h"
+#include "error.h"
 
 void	exec_key_action(char key, t_object *object)
 {
@@ -47,18 +48,18 @@ bool	kbhit(void)
 	int				ch;
 	int				oldf;
 
-	tcgetattr(STDIN_FILENO, &oldt);
+	if_err(tcgetattr(STDIN_FILENO, &oldt), "tcgetattr");
 	newt = oldt;
 	newt.c_lflag &= ~(ICANON | ECHO);
-	tcsetattr(STDIN_FILENO, TCSANOW, &newt);
-	oldf = fcntl(STDIN_FILENO, F_GETFL, 0);
-	fcntl(STDIN_FILENO, F_SETFL, oldf | O_NONBLOCK);
+	if_err(tcsetattr(STDIN_FILENO, TCSANOW, &newt), "tcsetattr");
+	oldf = if_err(fcntl(STDIN_FILENO, F_GETFL, 0), "fcntl");
+	if_err(fcntl(STDIN_FILENO, F_SETFL, oldf | O_NONBLOCK), "fcntl");
 	ch = getchar();
-	tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
-	fcntl(STDIN_FILENO, F_SETFL, oldf);
+	if_err(tcsetattr(STDIN_FILENO, TCSANOW, &oldt), "tcsetattr");
+	if_err(fcntl(STDIN_FILENO, F_SETFL, oldf), "fcntl");
 	if (ch != EOF)
 	{
-		ungetc(ch, stdin);
+		if_err(ungetc(ch, stdin), "ungetc");
 		return (true);
 	}
 	return (false);

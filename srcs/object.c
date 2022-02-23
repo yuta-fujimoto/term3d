@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   object.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fyuta <fyuta@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: ywake <ywake@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:24:30 by ywake             #+#    #+#             */
-/*   Updated: 2022/02/21 14:12:55 by fyuta            ###   ########.fr       */
+/*   Updated: 2022/02/23 16:41:56 by ywake            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "term3d.h"
 #include "error.h"
+#include <float.h>
 
 void	file_to_object(char const *filename, t_object *object)
 {
@@ -25,7 +26,10 @@ void	file_to_object(char const *filename, t_object *object)
 	{
 		p = (t_point *)if_null(malloc(sizeof(t_point)), "malloc");
 		if (fscanf(file, "%lf,%lf,%lf\n", &p->x, &p->y, &p->z) != 3)
+		{
+			fprintf(stderr, "invalid file.\n");
 			exit(EXIT_FAILURE);
+		}
 		ft_lstadd_back(&(object->points), if_null(ft_lstnew(p), "lstnew"));
 		object->size++;
 	}
