@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   shade.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fyuta <fyuta@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: ywake <ywake@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 14:55:39 by ywake             #+#    #+#             */
-/*   Updated: 2022/02/22 17:34:27 by fyuta            ###   ########.fr       */
+/*   Updated: 2022/02/23 15:48:23 by ywake            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "term3d.h"
-#define CHARSET ("@$#!=*~-,.")
+// #define CHARSET ("oi!*=;:~-,.")
+// #define CHARSET ("$o*=+-;:,.")
+#define CHARSET ("@#0%%8$G4XBH?Ikt/!w*xoc+;\":-,.")
 
 char	shader(double closest, double farthest, double distance)
 {
