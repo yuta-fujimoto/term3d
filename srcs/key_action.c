@@ -6,7 +6,7 @@
 /*   By: ywake <ywake@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 14:17:59 by fyuta             #+#    #+#             */
-/*   Updated: 2022/02/23 16:26:24 by ywake            ###   ########.fr       */
+/*   Updated: 2022/02/23 16:58:13 by ywake            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,14 @@ bool	kbhit(void)
 	int				ch;
 	int				oldf;
 
-	if_err(tcgetattr(STDIN_FILENO, &oldt), "tcgetattr");
+	tcgetattr(STDIN_FILENO, &oldt);
 	newt = oldt;
 	newt.c_lflag &= ~(ICANON | ECHO);
-	if_err(tcsetattr(STDIN_FILENO, TCSANOW, &newt), "tcsetattr");
+	tcsetattr(STDIN_FILENO, TCSANOW, &newt);
 	oldf = if_err(fcntl(STDIN_FILENO, F_GETFL, 0), "fcntl");
 	if_err(fcntl(STDIN_FILENO, F_SETFL, oldf | O_NONBLOCK), "fcntl");
 	ch = getchar();
-	if_err(tcsetattr(STDIN_FILENO, TCSANOW, &oldt), "tcsetattr");
+	tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
 	if_err(fcntl(STDIN_FILENO, F_SETFL, oldf), "fcntl");
 	if (ch != EOF)
 	{
