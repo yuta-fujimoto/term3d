@@ -6,7 +6,7 @@
 /*   By: ywake <ywake@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 14:19:28 by fyuta             #+#    #+#             */
-/*   Updated: 2022/02/22 12:04:15 by ywake            ###   ########.fr       */
+/*   Updated: 2022/02/23 14:03:15 by ywake            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	main(int ac, char const **av)
 		if (kbhit())
 		{
 			exec_key_action(getchar(), &object);
-			printf("\033[%dA", TERM_SIZE_Y);
+			printf("\033[%dA", HEIGHT);
 			draw(screen, &object);
 		}
 	}
