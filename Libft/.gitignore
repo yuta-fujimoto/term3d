@@ -1,0 +1,7 @@
+*
+!*.c
+!libft.h
+!Makefile
+!.gitignore
+!.github
+!.github/**
