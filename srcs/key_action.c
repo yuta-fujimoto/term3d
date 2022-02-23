@@ -6,7 +6,7 @@
 /*   By: ywake <ywake@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 14:17:59 by fyuta             #+#    #+#             */
-/*   Updated: 2022/02/23 14:21:17 by ywake            ###   ########.fr       */
+/*   Updated: 2022/02/23 16:12:50 by ywake            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	exec_key_action(char key, t_object *object)
 		exit(EXIT_SUCCESS);
 }
 
-// https://www.lisz-works.com/entry/c-lang-key-interrupt のコピペ
 bool	kbhit(void)
 {
 	struct termios	oldt;

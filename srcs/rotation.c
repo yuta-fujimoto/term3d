@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   rotation.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fyuta <fyuta@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: ywake <ywake@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 14:19:47 by fyuta             #+#    #+#             */
-/*   Updated: 2022/02/21 17:33:38 by fyuta            ###   ########.fr       */
+/*   Updated: 2022/02/23 16:12:39 by ywake            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "term3d.h"
 
-// y軸周り
 void	rotate_y(t_object *object, bool isleft)
 {
 	double	x;
@@ -37,7 +36,6 @@ void	rotate_y(t_object *object, bool isleft)
 	}
 }
 
-// x軸周り
 void	rotate_x(t_object *object, bool isleft)
 {
 	double	y;

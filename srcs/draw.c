@@ -6,7 +6,7 @@
 /*   By: ywake <ywake@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:31:20 by ywake             #+#    #+#             */
-/*   Updated: 2022/02/23 15:04:32 by ywake            ###   ########.fr       */
+/*   Updated: 2022/02/23 16:12:58 by ywake            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	init_screen(t_screen screen)
 	}
 }
 
-// 透視投影
 void	project_points(t_screen screen, t_object *object)
 {
 	int		x;
